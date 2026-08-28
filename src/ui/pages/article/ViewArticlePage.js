@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { expect, testStep } from '../../../common/pwHelpers/pw';
 
 export class ViewArticlePage {
@@ -5,6 +6,7 @@ export class ViewArticlePage {
     this.page = page;
     this.userId = userId;
     this.articleTitleHeader = page.getByRole('heading');
+    this.editArticleLink = page.getByRole('link', { name: 'Edit Article' }).first();
   }
 
   authorLinkInArticleHeader(username) {
@@ -55,6 +57,17 @@ export class ViewArticlePage {
       for (let i = 0; i < tags.length; i++) {
         await expect(this.tagListItem(tags[i])).toBeVisible();
       }
+    });
+  }
+   async clickEditArticleLink() {
+    await this.step(`Click the 'Edit Article' link`, async () => {
+      await this.editArticleLink.click();
+    });
+  }
+
+  async assertArticleHasNoTags() {
+    await this.step(`Assert the article has no tags`, async () => {
+      await expect(this.page.locator('.tag-list li')).toHaveCount(0);
     });
   }
 }
