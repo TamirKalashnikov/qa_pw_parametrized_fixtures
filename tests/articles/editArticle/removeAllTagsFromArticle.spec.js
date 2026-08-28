@@ -33,7 +33,7 @@ testParameters.forEach(({ tagsNumber, testNameEnding }) => {
       await viewArticlePage.assertArticleTagsAreVisible(article.tags);
 
       await viewArticlePage.clickEditArticleLink();
-      await editArticlePage.removeAllTags(article.tags);
+      await editArticlePage.removeAllTags();
       await editArticlePage.clickPublishButton();
 
       await viewArticlePage.assertArticleTitleIsVisible(article.title);

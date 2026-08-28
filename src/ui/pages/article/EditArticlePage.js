@@ -32,12 +32,15 @@ export class EditArticlePage {
     });
   }
 
-  async removeAllTags(tags) {
+   async removeAllTags() {
     await this.step(`Remove all tags`, async () => {
-      for (const tag of tags) {
-        await this.removeTag(tag);
+      const tagPills = this.page.locator('.tag-pill');
+
+      while ((await tagPills.count()) > 0) {
+        await tagPills.first().locator('i.ion-close-round').click();
       }
     });
+  
   }
 
     async clickPublishButton() {
